@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valencire - Account</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 32px;
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .logo img {
+            width: 120px;
+            height: auto;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        h2 {
+            text-align: center;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .tab-container {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 35px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 13px;
+            font-weight: 400;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab.active {
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .form-content {
+            display: none;
+        }
+
+        .form-content.active {
+            display: block;
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 30px;
+            color: #ffffff;
+            font-size: 14px;
+            outline: none;
+            backdrop-filter: blur(10px);
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        input:focus {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: #ffffff;
+            border: none;
+            border-radius: 30px;
+            color: #1a0b2e;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 12px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .divider span {
+            padding: 0 15px;
+        }
+
+
+
+        .terms {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+            line-height: 1.6;
+        }
+
+        .terms a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+        }
+
+        .switch-text {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .switch-text a {
+            color: #7c9fff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="LOGO BRO.png" alt="Logo">
+        </div>
+
+        <div class="tab-container">
+            <button class="tab active" onclick="switchTab('signin')">Sign In</button>
+            <button class="tab" onclick="switchTab('signup')">Sign Up</button>
+        </div>
+
+        <div id="signin" class="form-content active">
+            <form onsubmit="handleSignIn(event)">
+                <div class="input-group">
+                    <input type="email" id="signin-email" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="signin-password" placeholder="Password" required>
+                </div>
+                <button class="submit-btn" type="submit">Sign In</button>
+            </form>
+
+            <div class="divider">
+                <span>OR</span>
+            </div>
+
+            <div id="g_id_onload"
+                data-client_id="141236445779-he08mhuqmas5jt6shcauj857qbh90c6l.apps.googleusercontent.com"
+                data-context="signin" data-ux_mode="popup" data-callback="handleCredentialResponse"
+                data-auto_prompt="false">
+            </div>
+
+            <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline"
+                data-text="continue_with" data-size="large" data-logo_alignment="left" data-width="370">
+            </div>
+        </div>
+
+        <div id="signup" class="form-content">
+            <form onsubmit="handleSignUp(event)">
+                <div class="input-row">
+                    <input type="text" id="signup-firstname" placeholder="First Name" required>
+                    <input type="text" id="signup-lastname" placeholder="Last Name" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="signup-email" placeholder="Email Address" required>
+                </div>
+                <div class="input-row">
+                    <input type="password" id="signup-password" placeholder="Password" required>
+                    <input type="password" id="signup-confirm" placeholder="Confirm Password" required>
+                </div>
+                <button class="submit-btn" type="submit">Create Account</button>
+            </form>
+
+            <div class="divider">
+                <span>OR</span>
+            </div>
+
+            <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="signup_with"
+                data-size="large" data-logo_alignment="left" data-width="370">
+            </div>
+
+            <div class="terms">
+                By creating an account, you agree to our Terms & Privacy Policy.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Supabase Client
+        // TODO: Replace these placeholders with your actual Supabase project details
+        const SUPABASE_URL = 'https://crqeqejgdrjujsuvihsx.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNycWVxZWpnZHJqdWpzdXZpaHN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY1NjMxMTgsImV4cCI6MjA4MjEzOTExOH0.0Cb4nLFM8g6Aq6XRglrrXNpKknGAf30GfHy0QMqmjbA';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        function switchTab(tab) {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.form-content');
+
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById(tab).classList.add('active');
+        }
+
+        async function handleSignIn(e) {
+            e.preventDefault();
+            const email = document.getElementById('signin-email').value;
+            const password = document.getElementById('signin-password').value;
+
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password,
+                });
+
+                if (error) throw error;
+
+                alert('Sign in successful! Welcome back.');
+                console.log('User:', data.user);
+                // Redirect to cart
+                window.location.href = 'cart.html';
+
+            } catch (error) {
+                alert('Error signing in: ' + error.message);
+            }
+        }
+
+        async function handleSignUp(e) {
+            e.preventDefault();
+            const firstName = document.getElementById('signup-firstname').value;
+            const lastName = document.getElementById('signup-lastname').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm').value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: {
+                        data: {
+                            first_name: firstName,
+                            last_name: lastName
+                        }
+                    }
+                });
+
+                if (error) throw error;
+
+                alert('Sign up successful! Please check your email for the confirmation link.');
+                console.log('User:', data.user);
+
+                // For development/testing, if email confirmation is disabled in Supabase, 
+                // the user is logged in automatically.
+                if (data.user) {
+                    window.location.href = 'cart.html';
+                } else {
+                    // If email confirmation is ON, they can't login yet.
+                    window.location.href = 'index.html';
+                }
+
+            } catch (error) {
+                alert('Error signing up: ' + error.message);
+            }
+        }
+
+        async function handleCredentialResponse(response) {
+            // Google Sign-In Handler
+            try {
+                const { data, error } = await supabase.auth.signInWithIdToken({
+                    provider: 'google',
+                    token: response.credential,
+                });
+
+                if (error) throw error;
+
+                console.log('Google Sign-In User:', data.user);
+                alert('Logged in with Google as: ' + data.user.email);
+                window.location.href = 'cart.html';
+            } catch (error) {
+                console.error('Error with Google Sign-In:', error);
+                alert('Error logging in with Google: ' + error.message);
+            }
+        }
+
+        // Check active session on load
+        window.onload = async function () {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session) {
+                console.log('User already logged in:', session.user);
+                // Auto-redirect if already logged in (e.g. if coming from cart)
+                window.location.href = 'cart.html';
+            }
+        }
+    </script>
+</body>
+
+</html>
