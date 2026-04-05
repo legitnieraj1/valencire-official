@@ -64,6 +64,10 @@ export const CartProvider = ({ children }) => {
     setCart(prev => prev.filter(item => !(item.id === id && item.size === size)));
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
     setIsMenuOpen(false);
@@ -85,6 +89,7 @@ export const CartProvider = ({ children }) => {
       addToCart,
       updateQuantity,
       removeItem,
+      clearCart,
       isCartOpen,
       isMenuOpen,
       toggleCart,

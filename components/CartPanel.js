@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
+import { useRouter } from 'next/router';
 import { CartContext } from '../context/CartContext';
 
 export default function CartPanel() {
+  const router = useRouter();
   const { cart, isCartOpen, toggleCart, updateQuantity, removeItem } = useContext(CartContext);
 
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
   const handleCheckout = () => {
-    alert('Checkout functionality would be integrated here with payment gateway');
+    toggleCart();
+    router.push('/checkout');
   };
 
   return (

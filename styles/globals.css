@@ -110,35 +110,21 @@ header.scrolled .logo-container {
   height: 80px;
 }
 
-.logo-white {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 100%;
-  width: auto;
-  transition: opacity var(--transition);
+/* CSS Filter Crossfade for Main Header Logo */
+.header-logo-img {
+  height: 190px;
+  object-fit: contain;
+  transition: filter var(--transition), opacity var(--transition);
+  
+  /* OVER VIDEO (Transparent Header): Logo is White */
+  filter: brightness(0) invert(1);
 }
 
-.logo-black {
-  position: relative;
-  display: block;
-  height: 100%;
-  width: auto;
-  transition: opacity var(--transition);
-  filter: invert(1);
+/* OVER SCROLLED HEADER (White Background): Logo is Black */
+header:hover .header-logo-img,
+header.scrolled .header-logo-img {
+  filter: none;
 }
-
-/* Default (Transparent) = White */
-.logo-black { opacity: 0; }
-.logo-white { opacity: 1; }
-
-/* Solid (Hovered/Scrolled) = Black */
-header:hover .logo-white,
-header.scrolled .logo-white { opacity: 0; }
-
-header:hover .logo-black,
-header.scrolled .logo-black { opacity: 1; }
 
 .header-left {
   display: flex;

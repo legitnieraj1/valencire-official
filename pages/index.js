@@ -3,6 +3,7 @@ import { products } from '../data/products';
 import { CartContext } from '../context/CartContext';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import ReviewsCarousel from '../components/ReviewsCarousel';
 
 
 
@@ -181,43 +182,7 @@ export default function Home() {
 
 
       {/* ================= REVIEWS ================= */}
-      <section className="reviews-section">
-        <div className="section-header-row">
-          <h2 className="section-title">WHAT THEY SAY</h2>
-        </div>
-
-        <div className="reviews-grid">
-          <div className="review-card">
-            <div className="review-stars">★★★★★</div>
-            <div className="review-title">EXCELLENT QUALITY</div>
-            <p className="review-text">
-              The compression fit is insane. Feels like a second skin and the
-              material quality is legit premium. Will definitely order again.
-            </p>
-            <div className="review-author">ARJUN K. — MUMBAI</div>
-          </div>
-
-          <div className="review-card">
-            <div className="review-stars">★★★★★</div>
-            <div className="review-title">BEST FIT EVER</div>
-            <p className="review-text">
-              Finally a brand that understands body-fit without being
-              uncomfortable. The stitching and finish are top-tier for the price.
-            </p>
-            <div className="review-author">RAHUL M. — DELHI</div>
-          </div>
-
-          <div className="review-card">
-            <div className="review-stars">★★★★★</div>
-            <div className="review-title">PREMIUM STREETWEAR</div>
-            <p className="review-text">
-              Oversized tee fits exactly how I wanted. Clean design, no
-              unnecessary logos. This is what Indian streetwear should be.
-            </p>
-            <div className="review-author">PRIYA S. — BANGALORE</div>
-          </div>
-        </div>
-      </section>
+      <ReviewsCarousel />
 
       {/* ================= NEWSLETTER ================= */}
       <section className="newsletter">
