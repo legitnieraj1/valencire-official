@@ -8,8 +8,8 @@
 
 .admin-root {
   font-family: 'Inter', sans-serif;
-  background-color: theme('colors.brand.alt');
-  color: theme('colors.brand.text');
+  background-color: #FAFAFA;
+  color: #0A0A0A;
   min-height: 100vh;
 }
 
