@@ -31,16 +31,52 @@ export default function SwimShopSection() {
         >
           The Shirt Edit
         </h2>
-        <p className="text-[14px] font-light mb-2 opacity-95 max-w-xs leading-relaxed">
+        <p
+          className="mb-2 opacity-95 leading-relaxed"
+          style={{
+            fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
+            fontSize: 15,
+            fontWeight: 300,
+            fontStyle: "italic",
+            letterSpacing: "0.01em",
+            maxWidth: 300,
+          }}
+        >
           Effortless cuts in refined fabrics.
           <br />
           Dressed down. Always intentional.
         </p>
         <div className="flex items-center gap-6 mt-5">
-          <a href="/en/shirts" className="text-[13px] underline underline-offset-4 hover:opacity-70 transition-opacity">
+          <a
+            href="/en/shirts"
+            className="hover:opacity-60 transition-opacity"
+            style={{
+              fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
+              fontSize: 14,
+              fontWeight: 700,
+              letterSpacing: "0.08em",
+              textDecoration: "none",
+              color: "white",
+              borderBottom: "1px solid rgba(255,255,255,0.6)",
+              paddingBottom: 2,
+            }}
+          >
             Shop Shirts
           </a>
-          <a href="/en/trouser-pants" className="text-[13px] underline underline-offset-4 hover:opacity-70 transition-opacity">
+          <a
+            href="/en/trouser-pants"
+            className="hover:opacity-60 transition-opacity"
+            style={{
+              fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
+              fontSize: 14,
+              fontWeight: 700,
+              letterSpacing: "0.08em",
+              textDecoration: "none",
+              color: "white",
+              borderBottom: "1px solid rgba(255,255,255,0.6)",
+              paddingBottom: 2,
+            }}
+          >
             Shop Trousers
           </a>
         </div>
